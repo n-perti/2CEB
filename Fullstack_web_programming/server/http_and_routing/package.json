@@ -1,5 +1,16 @@
 {
   "dependencies": {
     "nodemon": "^3.1.7"
-  }
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "name": "http_and_routing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
