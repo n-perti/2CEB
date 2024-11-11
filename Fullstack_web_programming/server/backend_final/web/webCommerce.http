@@ -1,0 +1,63 @@
+### Get webCommerce by its CIF
+
+GET http://localhost:3000/api/webCommerce/view/A87654324
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWYiOiJBODc2NTQzMjQiLCJpYXQiOjE3MzAyNDEzMjIsImV4cCI6MTczMDI0ODUyMn0.wipECrX9T78kr87el7z6_SSTIHsRZfapIr7dBUpSOdo
+
+### Save a new webCommerce with model data
+POST http://localhost:3000/api/webCommerce/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWYiOiJBODc2NTQzMjQiLCJpYXQiOjE3MzAyMzM5MTIsImV4cCI6MTczMDI0MTExMn0.j8tlUbUYuaaCSKlNyvZlYNAyRS4xDK6nw_PyaLa0xX0
+Content-Type: application/json
+
+{
+    "city": "Madrid",
+    "activity": "Retail",
+    "title": "My Web Commerce",
+    "summary": "This is a summary of my web commerce.",
+    "text": ["Introduction", "Details", "Conclusion"],
+    "usersReview": {
+        "scoring": 4.5,
+        "totalReviews": 100,
+        "review": "Great service!"
+    },
+    "commerceCIF": "A87654324"
+}
+
+### Update a webCommerce by its CIF
+
+PUT http://localhost:3000/api/webCommerce/update/A87654324
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWYiOiJBODc2NTQzMjQiLCJpYXQiOjE3MzAyMzM5MTIsImV4cCI6MTczMDI0MTExMn0.j8tlUbUYuaaCSKlNyvZlYNAyRS4xDK6nw_PyaLa0xX0
+Content-Type: application/json
+
+{
+    "city": "Madridd",
+    "activity": "Retaild",
+    "title": "My Web Commerce",
+    "summary": "This is a summary of my web commerce.",
+    "text": ["Introduction", "Details", "Conclusionn"],
+    "isArchived": false
+}
+
+
+### Archive a webCommerce by its CIF
+
+DELETE http://localhost:3000/api/webCommerce/A87654321?action=archive
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWYiOiJBODc2NTQzMjQiLCJpYXQiOjE3MzAyMzM5MTIsImV4cCI6MTczMDI0MTExMn0.j8tlUbUYuaaCSKlNyvZlYNAyRS4xDK6nw_PyaLa0xX0
+
+
+### Delete a webCommerce by its CIF
+
+DELETE http://localhost:3000/api/webCommerce/A87654321?action=delete
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWYiOiJBODc2NTQzMjQiLCJpYXQiOjE3MzAyMTg3NDgsImV4cCI6MTczMDIyNTk0OH0.LW5-nLYiMR0zDoH6acU9qEZF_3Sy6uL9MGWY8ChdfSU
+
+
+### Upload an image to a webCommerce
+PATCH http://localhost:3000/api/webCommerce/upload/A87654321/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWYiOiJBODc2NTQzMjQiLCJpYXQiOjE3MzAyMzM5MTIsImV4cCI6MTczMDI0MTExMn0.j8tlUbUYuaaCSKlNyvZlYNAyRS4xDK6nw_PyaLa0xX0
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="example.jpg"
+Content-Type: image/jpeg
+
+< /Users/nicolaspertierra/Developer/2CEB/2CEB/Fullstack_web_programming/server/mvc_commerce/images/image_1.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
