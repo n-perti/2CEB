@@ -13,7 +13,10 @@ import { toast } from 'react-toastify';
 
 const merchantSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
-  cif: Yup.string().required('CIF is required'),
+  cif: Yup.string()
+    .min(8, 'CIF must be at least 8 characters')
+    .max(9, 'CIF must be at most 9 characters')
+    .required('CIF is required'),
   address: Yup.string().required('Address is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
   phone: Yup.string().required('Phone is required'),

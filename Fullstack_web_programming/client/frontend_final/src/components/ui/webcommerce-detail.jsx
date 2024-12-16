@@ -3,7 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Star, ChevronLeft, MapPin, Briefcase, Clock, Phone, Globe } from 'lucide-react';
+import {
+  Star,
+  ChevronLeft,
+  MapPin,
+  Briefcase,
+  Clock,
+  Phone,
+  Globe,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -37,7 +45,11 @@ const CommerceCard = ({ commerce }) => {
       <CardHeader className="relative p-0">
         <div className="relative h-96 w-full overflow-hidden">
           <Image
-            src={process.env.API_IMAGE_URL + commerce.images[0]}
+            src={
+              commerce.images && commerce.images[0]
+                ? `${process.env.API_IMAGE_URL}${commerce.images[0]}`
+                : "/missing-image.jpg"
+            }
             alt={commerce.title}
             fill
             className="object-center object-cover transition-transform duration-300 hover:scale-105"
@@ -88,7 +100,11 @@ const CommerceCard = ({ commerce }) => {
                   Reviews
                 </h3>
                 <div className="flex items-center gap-2">
-                  <Star className="text-yellow-400" fill="currentColor" size={28} />
+                  <Star
+                    className="text-yellow-400"
+                    fill="currentColor"
+                    size={28}
+                  />
                   <span className="font-semibold text-3xl">
                     {commerce.usersReview.scoring.toFixed(1)}
                   </span>
@@ -109,11 +125,19 @@ const CommerceCard = ({ commerce }) => {
                     <div className="flex justify-between items-center mb-2">
                       <div className="flex items-center gap-2">
                         <Clock size={14} className="text-gray-400" />
-                        <span className="text-sm text-gray-500">{review.date}</span>
+                        <span className="text-sm text-gray-500">
+                          {review.date}
+                        </span>
                       </div>
                       <div className="flex items-center">
-                        <Star className="text-yellow-400" fill="currentColor" size={16} />
-                        <span className="ml-1 font-semibold">{review.rating}</span>
+                        <Star
+                          className="text-yellow-400"
+                          fill="currentColor"
+                          size={16}
+                        />
+                        <span className="ml-1 font-semibold">
+                          {review.rating}
+                        </span>
                       </div>
                     </div>
                     <p className="text-gray-700">{review.review}</p>
@@ -131,10 +155,10 @@ const CommerceCard = ({ commerce }) => {
             Back to Webpages
           </Button>
         </Link>
-        <Button 
-          variant="default" 
-          size="lg" 
-          onClick={() => setIsDialogOpen(true)} 
+        <Button
+          variant="default"
+          size="lg"
+          onClick={() => setIsDialogOpen(true)}
           className="w-full sm:w-auto"
         >
           Add Review
@@ -158,4 +182,3 @@ function getReviewLabel(score) {
 }
 
 export default CommerceCard;
-

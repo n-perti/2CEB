@@ -49,9 +49,9 @@ const WebCommerces = () => {
               <div className="relative h-48 w-full">
                 <Image
                   src={
-                    commerce.images && commerce.images.length > 0
-                      ? process.env.API_IMAGE_URL + commerce.images[0]
-                      : "/Users/nicolaspertierra/Developer/2CEB/2CEB/Fullstack_web_programming/client/frontend_final/public/next.svg"
+                    commerce.images && commerce.images[0]
+                      ? `${process.env.API_IMAGE_URL}${commerce.images[0]}`
+                      : "/missing-image.jpg"
                   }
                   alt={commerce.title}
                   fill

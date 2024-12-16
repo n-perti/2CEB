@@ -50,7 +50,7 @@ export function NavBar() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                <DropdownMenuLabel>{userDetails.name}</DropdownMenuLabel>
+                <DropdownMenuLabel> Hi, {userDetails.name}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {userDetails.role === "admin" && (
                   <DropdownMenuItem className="text-gray-800">
