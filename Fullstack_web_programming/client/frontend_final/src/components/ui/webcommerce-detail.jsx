@@ -3,15 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  Star,
-  ChevronLeft,
-  MapPin,
-  Briefcase,
-  Clock,
-  Phone,
-  Globe,
-} from "lucide-react";
+import { Star, ChevronLeft, MapPin, Briefcase, Clock } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -22,6 +14,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import ReviewDialog from "@/components/ui/review-dialog";
 import { toast } from "react-toastify";
 import { createReview } from "@/lib/review";
@@ -40,30 +39,44 @@ const CommerceCard = ({ commerce }) => {
     }
   };
 
+  const images = commerce.images && commerce.images.length > 0
+    ? commerce.images
+    : ["/missing-image.jpg"];
+
   return (
     <Card className="w-full max-w-7xl mx-auto rounded-xl shadow-lg overflow-hidden">
       <CardHeader className="relative p-0">
-        <div className="relative h-96 w-full overflow-hidden">
-          <Image
-            src={
-              commerce.images && commerce.images[0]
-                ? `${process.env.API_IMAGE_URL}${commerce.images[0]}`
-                : "/missing-image.jpg"
-            }
-            alt={commerce.title}
-            fill
-            className="object-center object-cover transition-transform duration-300 hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
-          <div className="absolute bottom-0 left-0 p-8 w-full">
-            <CardTitle className="text-4xl font-bold mb-2 text-white">
-              {commerce.title}
-            </CardTitle>
-            <CardDescription className="text-gray-200 text-xl leading-relaxed max-w-3xl">
-              {commerce.summary ||
-                `Located in ${commerce.city}, specializing in ${commerce.activity}`}
-            </CardDescription>
-          </div>
+        <Carousel className="w-full">
+          <CarouselContent>
+            {images.map((image, index) => (
+              <CarouselItem key={index}>
+                <div className="relative h-96 w-full overflow-hidden">
+                  <Image
+                    src={image === "/missing-image.jpg" ? image : `${process.env.API_IMAGE_URL}${image}`}
+                    alt={`${commerce.title} - Image ${index + 1}`}
+                    fill
+                    className="object-center object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          {images.length > 1 && (
+            <>
+              <CarouselPrevious className="left-4" />
+              <CarouselNext className="right-4" />
+            </>
+          )}
+        </Carousel>
+        <div className="absolute bottom-0 left-0 p-8 w-full">
+          <CardTitle className="text-4xl font-bold mb-2 text-white">
+            {commerce.title}
+          </CardTitle>
+          <CardDescription className="text-gray-200 text-xl leading-relaxed max-w-3xl">
+            {commerce.summary ||
+              `Located in ${commerce.city}, specializing in ${commerce.activity}`}
+          </CardDescription>
         </div>
       </CardHeader>
       <CardContent className="p-8">
@@ -182,3 +195,4 @@ function getReviewLabel(score) {
 }
 
 export default CommerceCard;
+
